@@ -69,12 +69,16 @@ typedef struct {
 ### 3. 濾波器設計 (Filter Design)
 位於 design_filter 函式中，負責計算 FIR 低通濾波器的係數 h[n]。
 * **目的：** 在降頻 (Downsampling) 前濾除高頻訊號，防止混疊 (Aliasing)。
+
 * **數學原理：** 
-**1. Sinc 函數：** 計算理想低通濾波器。
-$$h_d[n] = \frac{\sin(\omega_c (n - center))}{\pi (n - center)}$$ 
-其中截止頻率  $\omega_c = \pi / M$ (取決於降頻倍率)。
-**2. 漢明窗 (Hamming Window) :** 修飾 Sinc 函數以減少吉布斯現象 (Gibbs Phenomenon)，使濾波器更平滑。$$w[n] = 0.54 - 0.46 \cos\left(\frac{2\pi n}{P-1}\right)$$
-**3.增益補償 (Gain)：** 係數最後乘以 $L$ (升頻倍率)，以補償補零造成的能量損失。
+
+    **1. Sinc 函數：** 計算理想低通濾波器。
+    $$h_d[n] = \frac{\sin(\omega_c (n - center))}{\pi (n - center)}$$ 
+    其中截止頻率  $\omega_c = \pi / M$ (取決於降頻倍率)。
+
+    **2. 漢明窗 (Hamming Window) :** 修飾 Sinc 函數以減少吉布斯現象 (Gibbs Phenomenon)，使濾波器更平滑。$$w[n] = 0.54 - 0.46 \cos\left(\frac{2\pi n}{P-1}\right)$$
+
+    **3.增益補償 (Gain)：** 係數最後乘以 $L$ (升頻倍率)，以補償補零造成的能量損失。
 
 ---
 ### 4. 核心轉換邏輯 (Main Loop)這是程式最複雜的部分，實作了 Resampling by Convolution。
