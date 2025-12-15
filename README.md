@@ -78,7 +78,7 @@ typedef struct {
 
     其中截止頻率  $\omega_c = \pi / M$ (取決於降頻倍率)。
 
-    **2. 漢明窗 (Hamming Window) :** 修飾 Sinc 函數以減少吉布斯現象 (Gibbs Phenomenon)，使濾波器更平滑。
+    **2. Hamming Window :** 修飾 Sinc 函數以減少吉布斯現象 (Gibbs Phenomenon)，使濾波器更平滑。
 
     $$w[n] = 0.54 - 0.46 \cos\left(\frac{2\pi n}{P-1}\right)$$
 
